@@ -1,5 +1,6 @@
 import {useEffect, useState } from 'react';
 import './App.css';
+import { Button } from '@mui/material';
 
 
 
@@ -28,15 +29,43 @@ useEffect(()=> {
   const decrease = () => {
       setTotal(total-1);
   }
+  //Two way Data Binding
+  const [activity, setActivity] = useState("")
+  const [activityList, setActivityList] = useState([]);
 
+  const clearActivity = () => {
+    setActivity("");
+  }
+  const addActivity = () => {
+     /* setActivityList((prevState) => {
+        prevState.push(activity);
+        return prevState;
+      });*/
+      //Destructuring yıkıcı method
+      setActivityList([...activityList,activity]);
+      clearActivity();
+  }
+  const removeActvity = (activity) =>{
+    setActivityList(activityList.filter(i => i !== activity));
+  }
   return (
     <>
       <div>
         <p>{total}</p>
       </div>
       <div>
-        <button onClick={increase}>Artır</button>
-        <button onClick={decrease}>Azalt</button>
+        <button onClick={() => {increase()}}>Artır</button>
+        <button onClick={() => {decrease()}}>Azalt</button>
+      </div>
+      <hr />
+      <div>
+        <input value={activity} onChange={(event) => {setActivity(event.target.value)}} type='text' placeholder='Aktivite giriniz..'/>
+        <br />
+        <button onClick={()=>{addActivity()}}>Ekle</button>
+        <ul>
+        {/*JSX içerisinde iterasyonlar her zaman MaP ile yapılmalıdır */}
+         {activityList.map((element) => <li key={element}>{element} <button onClick={() => {removeActvity(element)}} >X</button></li>)}
+        </ul>
       </div>
     </>
   );
