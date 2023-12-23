@@ -1,6 +1,7 @@
 import {useEffect, useState } from 'react';
 import './App.css';
-import { Button } from '@mui/material';
+import Navbar from './components/Navbar/Navbar';
+import ProductCard from './ProductCard';
 
 
 
@@ -50,6 +51,7 @@ useEffect(()=> {
   }
   return (
     <>
+      <Navbar name ="esra" />
       <div>
         <p>{total}</p>
       </div>
@@ -67,6 +69,9 @@ useEffect(()=> {
          {activityList.map((element) => <li key={element}>{element} <button onClick={() => {removeActvity(element)}} >X</button></li>)}
         </ul>
       </div>
+      <ProductCard name="Laptop" price={5000}/>
+      <ProductCard name="Klavye" price={4000}/>
+      <ProductCard name="Fare" price={300}/>
     </>
   );
 }
