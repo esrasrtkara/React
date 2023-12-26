@@ -4,6 +4,8 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.css"
 import Homepage from './pages/Homepage/Homepage';
 import Products from './pages/Products/Products';
+import Navbar from './components/Navbar/Navbar';
+
 
 
 
@@ -13,6 +15,8 @@ import Products from './pages/Products/Products';
 // class => className
 export default function App() {
   return (
+    <>
+    <Navbar/>
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<Homepage/>}></Route>
@@ -20,5 +24,6 @@ export default function App() {
       <Route path='*' element={<div>Not Found</div>}></Route>
     </Routes>
     </BrowserRouter>
+    </>
   );
 }
