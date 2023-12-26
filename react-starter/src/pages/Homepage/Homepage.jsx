@@ -2,45 +2,31 @@ import React, { useEffect } from 'react'
 import { Link, json } from 'react-router-dom';
 
 export default function Homepage() {
-    const myAsyncFunction = () =>{
-        return new Promise((resolve,reject) => {
-            //async işlem
-            setTimeout(() => {
-                resolve("veri örneği"); //İşlemin başarılı olması
-                //reject() //işlemin başarısız olması
-                
-            }, 3000);
-        });
-    };
-    useEffect(() => {
+ //http isteği
+ useEffect(() => {
+    //thenCatchFech();
+    awaitFetch();
 
-      //thenCathFinally();
-      asyncAwait();
-    }, []);
+ }, [])
 
-    const asyncAwait = async() =>{
-        try {
-            let response = await myAsyncFunction();
-            console.log(response);
-            
-        } catch (error) {
-            console.log(error);
-        }   
-    }
+ const awaitFetch =async() => {
+    let response = await fetch('https://dummyjson.com/products');
+    let json = await response.json();
+    console.log(json);
+ }
 
-    const thenCathFinally = () =>{
-        myAsyncFunction().then(response => {
-            console.log("Bir cevap geldi",response);
-          })
-          .catch(err => {
-            console.log("Bir hata geldi",err);
-          })
-          .finally(() => {
-            console.log("Async işlem sonlandı");
-          });
+  const thenCatchFech = () => {
+    fetch('https://dummyjson.com/products')
+    .then(response => response.json())
+    .then(json => {
+        console.log(json);
+    })
+    .catch(err => {
+        console.log(err);
+    })
 
-    }
-    
+  }
+ 
   
   return (
     <div>
