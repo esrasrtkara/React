@@ -40,6 +40,8 @@ export default function Homepage() {
         {/*SPA larda href attribute kullanımı yanlıştır. */}
         {/*<a href='/products'>Ürünler Sayfası</a>*/}
         <Link to={'/products'}>Ürünler Sayfası</Link>
+        <br/>
+        <Link to={'/addProduct'}>Ürün Ekle</Link>
     </div>
   )
 }
