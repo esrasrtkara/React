@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { GetAllProductsModel } from '../../models/responses/GetAllProductsModel';
 import { ProductModel } from '../../models/responses/ProductModel';
 import ProductCard from '../../components/ProductCard/ProductCard';
+import ProductService from '../../services/ProductService';
 
 type Props = {}
 
@@ -20,7 +21,8 @@ const Homepage = (props: Props) => {
 
 
     const fetchProducts = () =>{
-        axios.get<GetAllProductsModel>('https://dummyjson.com/products').then(response => {
+        let service:ProductService = new ProductService();
+          service.getAll().then(response => {
             setProducts(response.data.products);
         })
     }
