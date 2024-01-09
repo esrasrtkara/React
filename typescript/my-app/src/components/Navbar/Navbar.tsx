@@ -1,12 +1,19 @@
-import { useContext } from "react";
+import {useContext} from "react";
 import {Link} from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
+import {AuthContext} from "../../contexts/AuthContext";
+import { useSelector } from "react-redux";
+import type { RootState } from '../../redux/app/store'
+
 
 type Props = {};
 
 const Navbar = (props: Props) => {
-	const authContext = useContext(AuthContext)
-	console.log(authContext)
+	const authContext: any = useContext(AuthContext);
+
+	//const cartState = useSelector((state:any) => state.cart);
+	//console.log(cartState);
+
+	const cartState = useSelector((state:RootState)=>state.cart.cartItems)
 	return (
 		<nav
 			className="navbar bg-dark navbar-expand-lg bg-body-tertiary"
@@ -39,6 +46,19 @@ const Navbar = (props: Props) => {
 								Ürün Ekle
 							</Link>
 						</li>
+						{!authContext.isAuthenticated && (
+							<li className="nav-item">
+								<Link className="nav-link" to={"/login"}>
+									Giriş Yap
+								</Link>
+							</li>
+						)}
+						<li className="nav-item">
+						<Link className="nav-link" to={""}>
+							Sepetteki Ürün Toplamı : {cartState.length}
+							</Link>
+						</li>
+					
 					</ul>
 					<form className="d-flex" role="search">
 						<input
